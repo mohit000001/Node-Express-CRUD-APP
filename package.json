@@ -1,0 +1,19 @@
+{
+  "name": "node-express-crud-app",
+  "version": "0.0.1",
+  "description": "Crud Application to perform add, select, delete, update operation using nodejs and expressjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohit000001/Node-Express-CRUD-APP.git"
+  },
+  "author": "mohit swami",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mohit000001/Node-Express-CRUD-APP/issues"
+  },
+  "homepage": "https://github.com/mohit000001/Node-Express-CRUD-APP#readme"
+}
