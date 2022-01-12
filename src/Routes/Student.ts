@@ -3,20 +3,22 @@ import Express from "express";
 import Mongoose from "mongoose";
 import url from 'url';
 import StudentModel from '../Database/Models/Student'
-
+import { Student, Response } from "../Types";
 const StudentRoute = Express.Router();
-
-interface Student {
-    id: number,
-    name: string,
-    age: number,
-    class: string,
-    section: string
-}
 
 StudentRoute.get('/', (req, res) => {
     const data = StudentModel.find((err: any, resp) => {
-        res.send(resp);
+        let response: Response = {
+            status : "successfull",
+        };
+        if(err) {
+           response.status = "faild";
+           response.message = err.message;
+           res.send(response);
+           return;
+        }
+        response.data = resp;
+        res.send(response);
     });
 })
 
@@ -30,12 +32,22 @@ StudentRoute.post('/', (req, res) => {
       section: requestBody.section
     }
     const studentData = new StudentModel(inputData)
-    studentData.save(function (err: any) {
-        if (err) {
-            console.log(err)
+    studentData.save(function (err: any, resp: any) {
+        let response: Response = {
+            status : "successfull",
+        };
+        if(err) {
+           response.status = "faild";
+           response.message = err.message;
+           res.send(response);
+           return;
         }
-    });
-    res.send('Added');
+        response.data = {
+            id: resp.id,
+            name: resp.name
+        };
+        res.send(response);
+      });
 })
 
 StudentRoute.put('/', (req, res) => {
@@ -48,16 +60,36 @@ StudentRoute.put('/', (req, res) => {
         section: requestBody.data.section
     }
     StudentModel.updateMany(StudentId, inputData,(err : any, resp: any) => {
-        console.log(resp);
+        let response: Response = {
+            status : "successfull",
+        };
+        if(err) {
+           response.status = "faild";
+           response.message = err.message;
+           res.send(response);
+           return;
+        }
+        response.message = `Record updated sucessfully`;
+        res.send(response);
     })
-    res.send('Updated');
 })
 
 StudentRoute.delete('/', (req, res) => {
     const requestBody = req.body;
     const StudentId = { id : requestBody.query.id };
-    StudentModel.remove(StudentId);
-    res.send('Deleted');
+    StudentModel.deleteMany(StudentId, (err: any) => {
+        let response: Response = {
+            status : "successfull",
+        };
+        if(err) {
+           response.status = "faild";
+           response.message = err.message;
+           res.send(response);
+           return;
+        }
+        response.message = `Record deleted sucessfully`;
+        res.send(response);
+    });
 })
 
 export default StudentRoute;
