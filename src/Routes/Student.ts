@@ -42,6 +42,7 @@ StudentRoute.post('/', (req, res) => {
            res.send(response);
            return;
         }
+        response.message = "Added Successfully";
         response.data = {
             id: resp.id,
             name: resp.name
