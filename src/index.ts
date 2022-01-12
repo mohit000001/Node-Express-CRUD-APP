@@ -1,8 +1,11 @@
 import Express from "express";
 import Dotenv from 'dotenv';
 import RecordRouter from './Routes/Records';
+import {intializeBD} from './Database/Database';
 
 Dotenv.config();
+intializeBD();
+
 const App = Express();
 
 App.all('/', (req, res) => {
