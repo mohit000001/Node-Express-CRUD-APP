@@ -1,3 +1,4 @@
+import { error } from "console";
 import Express from "express";
 import Mongoose from "mongoose";
 import url from 'url';
@@ -12,6 +13,12 @@ interface Student {
     class: string,
     section: string
 }
+
+StudentRoute.get('/', (req, res) => {
+    const data = StudentModel.find((err: any, resp) => {
+        res.send(resp);
+    });
+})
 
 StudentRoute.post('/', (req, res) => {
     const requestBody = req.body;
@@ -28,14 +35,29 @@ StudentRoute.post('/', (req, res) => {
             console.log(err)
         }
     });
-    res.send('ddd');
+    res.send('Added');
 })
 
-StudentRoute.get('/', (req, res) => {
-    StudentModel.find((err, res) => {
-        console.log(res);
+StudentRoute.put('/', (req, res) => {
+    const requestBody = req.body;
+    const StudentId = { id : requestBody.query.id };
+    const inputData  = {
+        name: requestBody.data.name,
+        age: requestBody.data.age,
+        class: requestBody.data.class,
+        section: requestBody.data.section
+    }
+    StudentModel.updateMany(StudentId, inputData,(err : any, resp: any) => {
+        console.log(resp);
     })
-    res.send('xxx');
+    res.send('Updated');
+})
+
+StudentRoute.delete('/', (req, res) => {
+    const requestBody = req.body;
+    const StudentId = { id : requestBody.query.id };
+    StudentModel.remove(StudentId);
+    res.send('Deleted');
 })
 
 export default StudentRoute;
