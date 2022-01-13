@@ -11,7 +11,7 @@ const App = Express();
 App.use(Express.json());
 
 App.all('/', (req, res) => {
-    res.send('Welcome To Crud Application, use /student to make requests - update');
+    res.send('Welcome To Crud Application, use /student to make requests');
 });
 
 App.use("/student", StudentRoute);
