@@ -5,14 +5,13 @@ interface Student {
     class: string,
     section: string
 }
-
 interface Response {
     status : string,
     message ? : string,
-    error ? : {
-        type: string,
-        message: string,
-    }
     data ? : any,
 }
-export { Student, Response }
+interface ValidationResponse {
+    status: boolean,
+    message ?: string
+}
+export { Student, Response, ValidationResponse }

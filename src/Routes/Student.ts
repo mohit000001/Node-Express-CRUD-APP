@@ -1,9 +1,11 @@
+import { fail } from "assert";
 import { error } from "console";
 import Express from "express";
 import Mongoose from "mongoose";
 import url from 'url';
 import StudentModel from '../Database/Models/Student'
 import { Student, Response } from "../Types";
+import { ValidateAddOpt } from "../Utils/Validations";
 const StudentRoute = Express.Router();
 
 StudentRoute.get('/', (req, res) => {
@@ -24,6 +26,16 @@ StudentRoute.get('/', (req, res) => {
 
 StudentRoute.post('/', (req, res) => {
     const requestBody = req.body;
+    console.log('Executing Add record opt, Request Body : ', requestBody)
+    const valiRes = ValidateAddOpt(requestBody);
+    if(valiRes.status === false) {
+        let response: Response = {
+            status: "failed",
+            message: valiRes.message
+        };
+        res.send(response);
+        return;
+    }
     const inputData : Student = {
       id: requestBody.id,
       name: requestBody.name,
@@ -38,7 +50,7 @@ StudentRoute.post('/', (req, res) => {
         };
         if(err) {
            response.status = "faild";
-           response.message = err.message;
+           response.message = "Someting went wrong, please try later. errorCode #02";
            res.send(response);
            return;
         }
@@ -53,7 +65,7 @@ StudentRoute.post('/', (req, res) => {
 
 StudentRoute.put('/', (req, res) => {
     const requestBody = req.body;
-    const StudentId = { id : requestBody.query.id };
+    const StudentId = { id : requestBody.id };
     const inputData  = {
         name: requestBody.data.name,
         age: requestBody.data.age,
@@ -66,7 +78,7 @@ StudentRoute.put('/', (req, res) => {
         };
         if(err) {
            response.status = "faild";
-           response.message = err.message;
+           response.message = "Someting went wrong, please try later. errorCode #02";;
            res.send(response);
            return;
         }
@@ -84,7 +96,7 @@ StudentRoute.delete('/', (req, res) => {
         };
         if(err) {
            response.status = "faild";
-           response.message = err.message;
+           response.message = "Someting went wrong, please try later. errorCode #02";;
            res.send(response);
            return;
         }
