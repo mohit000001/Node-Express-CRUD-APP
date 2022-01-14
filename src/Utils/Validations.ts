@@ -14,7 +14,7 @@ const ValidateAddOpt = (data: any) : ValidationResponse => {
 }
 
 const ValidateEditOpt = (data: any) : ValidationResponse => {
-    if(!data.id || !data.name || !data.age || !data.class || !data.section) {
+    if(!data.query.id || !data.data.name || !data.data.age || !data.data.class || !data.data.section) {
         return {
             status: false,
             message: "One of required feild data (id, name, age, class, section) is missing. errorCode #01"

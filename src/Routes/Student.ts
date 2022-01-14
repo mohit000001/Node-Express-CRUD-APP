@@ -5,7 +5,7 @@ import Mongoose from "mongoose";
 import url from 'url';
 import StudentModel from '../Database/Models/Student'
 import { Student, Response } from "../Types";
-import { ValidateAddOpt } from "../Utils/Validations";
+import { ValidateAddOpt, ValidateEditOpt, ValidateDeleteOpt } from "../Utils/Validations";
 const StudentRoute = Express.Router();
 
 StudentRoute.get('/', (req, res) => {
@@ -65,7 +65,16 @@ StudentRoute.post('/', (req, res) => {
 
 StudentRoute.put('/', (req, res) => {
     const requestBody = req.body;
-    const StudentId = { id : requestBody.id };
+    const valiRes = ValidateEditOpt(requestBody);
+    if(valiRes.status === false) {
+        let response: Response = {
+            status: "failed",
+            message: valiRes.message
+        };
+        res.send(response);
+        return;
+    }
+    const StudentId = { id : requestBody.query.id };
     const inputData  = {
         name: requestBody.data.name,
         age: requestBody.data.age,
