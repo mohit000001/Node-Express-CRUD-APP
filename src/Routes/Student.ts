@@ -19,7 +19,15 @@ StudentRoute.get('/', (req, res) => {
            res.send(response);
            return;
         }
-        response.data = resp;
+        response.data = resp.map((data) => {
+            return {
+                id: data.id,
+                name: data.name,
+                age: data.age,
+                class: data.age,
+                section: data.section
+            }
+        });
         res.send(response);
     });
 })
@@ -65,6 +73,7 @@ StudentRoute.post('/', (req, res) => {
 
 StudentRoute.put('/', (req, res) => {
     const requestBody = req.body;
+    console.log('Executing Edit record opt, Request Body : ', requestBody)
     const valiRes = ValidateEditOpt(requestBody);
     if(valiRes.status === false) {
         let response: Response = {
@@ -97,8 +106,18 @@ StudentRoute.put('/', (req, res) => {
 })
 
 StudentRoute.delete('/', (req, res) => {
-    const requestBody = req.body;
-    const StudentId = { id : requestBody.query.id };
+    const requestBody = req.query;
+    console.log('Executing Delete record opt, Request Body : ', req.query)
+    const valiRes = ValidateDeleteOpt(requestBody);
+    if(valiRes.status === false) {
+        let response: Response = {
+            status: "failed",
+            message: valiRes.message
+        };
+        res.send(response);
+        return;
+    }
+    const StudentId = { id : requestBody.id };
     StudentModel.deleteMany(StudentId, (err: any) => {
         let response: Response = {
             status : "successfull",
