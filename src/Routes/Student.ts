@@ -25,7 +25,7 @@ StudentRoute.get('/', (req, res) => {
                 id: data.id,
                 name: data.name,
                 age: data.age,
-                class: data.age,
+                class: data.class,
                 section: data.section
             }
         });
