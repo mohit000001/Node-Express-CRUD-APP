@@ -14,6 +14,7 @@ StudentRoute.get('/', (req, res) => {
             status : "successfull",
         };
         if(err) {
+           console.log('Database Error : ', err);
            response.status = "faild";
            response.message = err.message;
            res.send(response);
@@ -57,6 +58,7 @@ StudentRoute.post('/', (req, res) => {
             status : "successfull",
         };
         if(err) {
+           console.log('Database Error : ', err);
            response.status = "faild";
            response.message = "Someting went wrong, please try later. errorCode #02";
            res.send(response);
@@ -95,6 +97,7 @@ StudentRoute.put('/', (req, res) => {
             status : "successfull",
         };
         if(err) {
+            console.log('Database Error : ', err);
            response.status = "faild";
            response.message = "Someting went wrong, please try later. errorCode #02";;
            res.send(response);
@@ -119,6 +122,7 @@ StudentRoute.delete('/', (req, res) => {
     }
     const StudentId = { id : requestBody.id };
     StudentModel.deleteMany(StudentId, (err: any) => {
+        console.log('Database Error : ', err);
         let response: Response = {
             status : "successfull",
         };

@@ -1,7 +1,6 @@
 import { ValidationResponse } from "../Types"
 
 const ValidateAddOpt = (data: any) : ValidationResponse => {
-    console.log("data : " , data)
   if(!data.id || !data.name || !data.age || !data.class || !data.section) {
       return {
           status: false,
