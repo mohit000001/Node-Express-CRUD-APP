@@ -1,10 +1,6 @@
-import { fail } from "assert";
-import { error } from "console";
 import Express from "express";
-import Mongoose from "mongoose";
-import url from 'url';
 import StudentModel from '../Database/Models/Student'
-import { Student, Response } from "../Types";
+import { Student, Response } from "../Utils/Types";
 import { ValidateAddOpt, ValidateEditOpt, ValidateDeleteOpt } from "../Utils/Validations";
 const StudentRoute = Express.Router();
 

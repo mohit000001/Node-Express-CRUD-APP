@@ -3,13 +3,14 @@ import Dotenv from 'dotenv';
 import StudentRoute from './Routes/Student';
 import {intializeBD} from './Database/Database';
 import Cros from 'cors';
+
 Dotenv.config();
 intializeBD();
 
 const App = Express();
-
 App.use(Express.json());
 App.use(Cros())
+
 App.all('/', (req, res) => {
     res.send('Welcome To Crud Application, use /student to make requests');
 });

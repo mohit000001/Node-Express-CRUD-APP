@@ -1,4 +1,4 @@
-import { ValidationResponse } from "../Types"
+import { ValidationResponse } from "./Types"
 
 const ValidateAddOpt = (data: any) : ValidationResponse => {
   if(!data.id || !data.name || !data.age || !data.class || !data.section) {
