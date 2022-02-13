@@ -69,7 +69,6 @@ AuthRoutes.post('/login', async (req: any, res) => {
         });  
     }
 })
-
 AuthRoutes.post('/authverify', async (req: any, res) => {
   const token = req.header('Auth');
   if(token) {
