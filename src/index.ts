@@ -1,6 +1,7 @@
 import Express from "express";
 import Dotenv from 'dotenv';
 import StudentRoute from './Routes/Student';
+import AuthRoutes from "./Routes/Auth";
 import {intializeBD} from './Database/Database';
 import Cros from 'cors';
 
@@ -16,6 +17,7 @@ App.all('/', (req, res) => {
 });
 
 App.use("/student", StudentRoute);
+App.use("/auth", AuthRoutes);
 
 const Port: number = parseInt(<string>process.env.PORT, 10);
 App.listen(Port, () => {

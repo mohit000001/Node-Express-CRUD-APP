@@ -14,4 +14,8 @@ interface ValidationResponse {
     status: boolean,
     message ?: string
 }
-export { Student, Response, ValidationResponse }
+interface User {
+    userName: string,
+    password: string,
+}
+export { Student, Response, ValidationResponse, User}
