@@ -41,7 +41,7 @@ AuthRoutes.post('/login', async (req: any, res) => {
 
                const token = await generateToken(user.userName);
                res.send({
-                status: "Successfull",
+                status: "successfull",
                 message: 'LogIN Success',
                 token
             });  
@@ -58,8 +58,6 @@ AuthRoutes.post('/login', async (req: any, res) => {
                 message: 'User Not Found',
             });   
          }
-         res.send('')
-         console.log(users); 
     }
     catch(err:any) {
         console.log(err)
@@ -80,7 +78,7 @@ AuthRoutes.post('/authverify', async (req: any, res) => {
         });  
     } else {
         res.send({
-            status: "Sucessfull",
+            status: "sucessfull",
             data: response,
         }); 
     }
