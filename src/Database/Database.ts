@@ -1,6 +1,6 @@
 import Dotenv from 'dotenv';
 import Mongoose from "mongoose";
-// test
+// tes
 Dotenv.config();
 
  function intializeBD() {  
