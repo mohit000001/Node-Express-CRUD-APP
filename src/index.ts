@@ -20,7 +20,7 @@ App.use("/student", StudentRoute);
 App.use("/auth", AuthRoutes);
 
 const Port: number = parseInt(<string>process.env.PORT, 10);
-App.listen(Port, () => {
+App.listen(9000, () => {
     console.log(`Server started, Listening on ${Port}`)
 });
 
